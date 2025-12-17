@@ -57,6 +57,7 @@ export class Busca {
         this.requisicao(`https://servicodados.ibge.gov.br/api/v1/localidades/municipios/${idParse}`)
       );
       this.local.setCidade(dados);
+      this.local.setStatus(false);
     } else {
       this.local.resetCid();
     }

@@ -1,7 +1,10 @@
-<div class="bg-cyan-600 flex flex-col p-6 items-center">
+<div class="bg-linear-65 from-sky-700/75 to-sky-700 flex flex-col pt-6 backdrop-blur-2xl">
     @if(local.isStatus()) {
         <h1 class="text-4xl text-center text-white font-semibold">Tempo para {{local.getCidade().nome}}</h1>
     } @else {
         <h1 class="text-4xl text-center text-white font-semibold">Selecione uma cidade</h1>
     }
+    <div class="bg-linear-to-t from-sky-600 to-sky-700">
+        <img class="w-screen opacity-40 " style="background-size: cover;" src="https://cdn.pixabay.com/photo/2020/08/11/21/39/clouds-5481190_960_720.jpg" alt="">
+    </div>
 </div>

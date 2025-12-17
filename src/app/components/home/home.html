@@ -1,3 +1,7 @@
-<div class="flex text-white">
-    <h1>Selecione uma cidade</h1>
+<div class="bg-cyan-600 flex flex-col p-6 items-center">
+    @if(local.isStatus()) {
+        <h1 class="text-4xl text-center text-white font-semibold">Tempo para {{local.getCidade().nome}}</h1>
+    } @else {
+        <h1 class="text-4xl text-center text-white font-semibold">Selecione uma cidade</h1>
+    }
 </div>

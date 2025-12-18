@@ -1,7 +1,7 @@
 import Cidade from './Cidade';
 import Estado from './Estado';
 import { environment } from '../../../environments/environment';
-interface IUvDados {
+export interface IUvDados {
   cor: string;
   nivel: string;
   dica: string;
@@ -13,9 +13,9 @@ export default class Local {
   private clima!: Clima;
   private uvDados: IUvDados[] = [
     {
-      cor: 'bg-green-500',
+      cor: 'bg-green-500 text-white',
       nivel: 'Baixo',
-      dica: 'Nenhuma precaução necessária. Procure uma combra nas horas próximas ao meio-dia.',
+      dica: 'Nenhuma precaução necessária. Procure uma sombra nas horas próximas ao meio-dia.',
     },
     {
       cor: 'bg-amber-200 text-stone-700',
@@ -28,12 +28,12 @@ export default class Local {
       dica: 'Risco Alto. User protetor solar FPS alto, em horários próximos ao meio-dia, procure locais sombreados. Procure usar camisa, boné e óculos de sol.',
     },
     {
-      cor: 'bg-red-600',
+      cor: 'bg-red-600 text-white',
       nivel: 'Muito Alto',
       dica: 'Risco muito alto. Evite o sol em horários próximos ao meio-dia, use protetor FPS 50+, chapéu, óculos de sol e roupa',
     },
     {
-      cor: 'bg-violet-800',
+      cor: 'bg-violet-800 text-white',
       nivel: 'Extremo',
       dica: 'Risco extremo. Evite exposição ao sol a todo custo. Mesmo curtos períodos causam queimaduras graves',
     },
@@ -60,7 +60,7 @@ export default class Local {
             sunrise: '10:44',
             sunset: '23:47',
             temp: 24.19,
-            uv: 2,
+            uv: 4,
             weather: {
               code: 803,
               description: 'Broken clouds',

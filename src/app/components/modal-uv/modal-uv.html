@@ -1,0 +1,13 @@
+<div class="flex flex-col bg-white rounded-lg shadow-xl">
+  <div class="flex {{ data.cor }} p-2 rounded-t-lg justify-center">
+    <h1 class="text-4xl font-semibold">Nivel de UV: {{ data.nivel }}</h1>
+  </div>
+  <div class="flex flex-col p-3">
+    <div class="flex justify-center items-center gap-3">
+      <h2 class="text-4xl">Dicas e cuidados</h2>
+      <i class="text-3xl text-amber-500 bi bi-exclamation-triangle-fill"></i>
+    </div>
+    <p class="text-2xl text-center w-2xl">{{ data.dica }}</p>
+  </div>
+  <button (click)="fecharModalUV()" class="cursor-pointer hover:bg-cyan-400 text-white rounded-b-lg p-2 bg-cyan-500 text-2xl">Entendi</button>
+</div>

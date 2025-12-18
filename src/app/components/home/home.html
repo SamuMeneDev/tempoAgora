@@ -1,19 +1,19 @@
-<div class="bg-cyan-600 flex flex-col p-6 items-center">
-  <div class="flex flex-col items-center gap-3">
+<div class="bg-cyan-600 flex flex-col">
+  <div class="flex flex-col gap-3">
     @if(local.isStatus()) {
     <!-- Nome e tempo da Cidade -->
-    <h1 class="text-4xl text-center text-white font-semibold">
+    <h1 class="text-4xl self-center text-center text-white font-semibold">
       Tempo para {{ local.getCidade().nome }} - {{ local.getEstado().sigla }}
     </h1>
-    <h2 class="text-3xl text-white">{{ local.getClima().data[0].weather.description }}</h2>
-    <div class="flex items-center gap-6">
+    <h2 class="text-3xl self-center text-white">{{ local.getClima().data[0].weather.description }}</h2>
+    <div class="flex self-center items-center gap-6">
       <div class="flex text-white">
         <span class="text-5xl font-bold">{{ local.getClima().data[0].temp.toFixed(0) }}°C</span>
         <i class="text-5xl bi bi-thermometer-half"></i>
       </div>
       <img src="/img/icons/{{ local.getClima().data[0].weather.icon }}.png" class="w-20" />
     </div>
-    <div class="flex flex-10">
+    <div class="flex self-center flex-10">
       <span class="text-white text-center font-semibold text-3xl"
         >Sensação térmica de {{ local.getClima().data[0].app_temp.toFixed(0) }}°C</span
       >
@@ -21,8 +21,8 @@
 
     <!-- Outros detalhes -->
 
-    <div class="grid grid-cols-12 justify-start">
-      <div class="grid col-span-4 text-white">
+    <div class="grid grid-cols-12 bg-cyan-700 p-3 justify-start">
+      <div class="grid col-span-3 text-white">
         <div class="flex flex-col items-center">
           <h2 class="lg:text-3xl text-center">Nascer do Sol</h2>
           <i class="text-amber-500 text-5xl md:text-7xl bi bi-sunrise-fill"></i>
@@ -35,7 +35,7 @@
           </div>
         </div>
       </div>
-      <div class="grid col-span-5 text-white text-center">
+      <div class="grid col-span-6 text-white text-center">
         <div class="flex flex-col items-center">
           <div class="flex gap-2 items-start">
             <h2 class="lg:text-3xl text-center">Índice UV</h2>
@@ -49,8 +49,8 @@
               >{{ local.getClima().data[0].uv }}</span
             >
             <button
-              (click)="abrirModalUV(modal)"
               class="text-neutral-50 cursor-pointer hover:text-neutral-200"
+              (click)="openModalUV(local.uvLevel(local.getClima().data[0].uv))"
             >
               <i class="text-2xl bi bi-info-circle-fill"></i>
             </button>
@@ -76,9 +76,4 @@
     <img class="pointer-events-none" src="img/images.png" alt="Teste" />
     }
   </div>
-  <dialog #modal>
-    <div class="flex">
-      <h1 class="text-5xl">Teste Modal</h1>
-    </div>
-  </dialog>
 </div>

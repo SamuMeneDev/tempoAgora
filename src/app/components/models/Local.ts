@@ -39,8 +39,8 @@ export default class Local {
     },
   ];
   public constructor(template?: boolean) {
-    
-    if (template) { // Template para não consumir a API
+    if (template) {
+      // Template para não consumir a API
       this.estado = {
         id: 0,
         nome: 'São Paulo',
@@ -60,7 +60,14 @@ export default class Local {
             sunrise: '10:44',
             sunset: '23:47',
             temp: 24.19,
-            uv: 4,
+            precip: 2,
+            wind_spd: 6.17,
+            gust: 8,
+            uv: 8,
+            aqi: 45,
+            wind_cdir_full: 'northeast',
+            wind_cdir: 'NE',
+            wind_dir: 50,
             weather: {
               code: 803,
               description: 'Broken clouds',
@@ -74,6 +81,51 @@ export default class Local {
       this.reset();
     }
   }
+  public directionFull(sigla: string): string {
+    switch (sigla) {
+      case 'N':
+        return 'Norte';
+      case 'NE':
+        return 'Nordeste';
+      case 'E':
+        return 'Leste';
+      case 'SE':
+        return 'Sudeste';
+      case 'S':
+        return 'Sul';
+      case 'SW':
+        return 'Sudoeste';
+      case 'W':
+        return 'Oeste';
+      case 'NW':
+        return 'Noroeste';
+      default:
+        throw new Error('Ponto inválido');
+    }
+  }
+  public directionS(sigla: string): string {
+    switch (sigla) {
+      case 'N':
+        return sigla;
+      case 'NE':
+        return sigla;
+      case 'E':
+        return sigla;
+      case 'SE':
+        return sigla;
+      case 'S':
+        return sigla;
+      case 'SW':
+        return 'SO';
+      case 'W':
+        return 'O';
+      case 'NW':
+        return 'NO';
+      default:
+        throw new Error('Ponto inválido');
+    }
+  }
+
   public static requisicao(url: string) {
     const request = new XMLHttpRequest();
     request.open('GET', url, false);
@@ -164,6 +216,58 @@ export default class Local {
       }
     } else {
       throw new Error('Parâmetro inválido na função');
+    }
+  }
+  public airLevel(air: number): IUvDados {
+    if (air < 51) {
+      return {
+        cor: 'bg-green-600 text-white',
+        nivel: 'Bom',
+        dica: 'Qualidade satisfatória, pouco ou nenhum risco à saúde',
+      };
+    } else if (air < 101) {
+      return {
+        cor: 'bg-yellow-400 text-stone-800',
+        nivel: 'Moderado',
+        dica: 'Aceitável, mas pode haver risco para pessoas sensíveis (ozônio, particulados).',
+      };
+    } else if (air < 151) {
+      return {
+        cor: 'bg-orange-600 text-white',
+        nivel: 'Alerta para grupos sensíveis',
+        dica: 'Efeitos na saúde para pessoas sensíveis; o público em geral não é afetado.',
+      };
+    } else if (air < 201) {
+      return {
+        cor: 'bg-red-600 text-white',
+        nivel: 'Pouvo saudável',
+        dica: 'Efeitos para toda a população; grupos sensíveis sofrem mais.',
+      };
+    } else if (air < 301) {
+      return {
+        cor: 'bg-purple-600 text-white',
+        nivel: 'Muito insalubre',
+        dica: 'Alerta de saúde de emergência; todos são afetados.',
+      };
+    } else {
+      return {
+        cor: 'bg-red-950 text-white',
+        nivel: 'Perigoso',
+        dica: 'Condições de emergência; risco sério à saúde para todos',
+      };
+    }
+  }
+  public chuvaLevel(chuva: number): string {
+    if(chuva <= 0) {
+      return "Sem chuva prevista";
+    } else if (chuva <= 2.5) {
+      return "Chuva Fraca";
+    }  else if(chuva <= 10) {
+      return "Chuva Moderada";
+    } else if(chuva <= 50) {
+      return "Chuva Forte";
+    } else {
+      return "Chuva Muito Forte/Violenta";
     }
   }
 }

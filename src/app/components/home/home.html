@@ -1,11 +1,13 @@
 <div class="bg-cyan-600 flex flex-col">
-  <div class="flex flex-col gap-3">
+  <div class="flex flex-col pt-3">
     @if(local.isStatus()) {
     <!-- Nome e tempo da Cidade -->
     <h1 class="text-4xl self-center text-center text-white font-semibold">
       Tempo para {{ local.getCidade().nome }} - {{ local.getEstado().sigla }}
     </h1>
-    <h2 class="text-3xl self-center text-white">{{ local.getClima().data[0].weather.description }}</h2>
+    <h2 class="text-3xl self-center text-white">
+      {{ local.getClima().data[0].weather.description }}
+    </h2>
     <div class="flex self-center items-center gap-6">
       <div class="flex text-white">
         <span class="text-5xl font-bold">{{ local.getClima().data[0].temp.toFixed(0) }}°C</span>
@@ -21,7 +23,7 @@
 
     <!-- Outros detalhes -->
 
-    <div class="grid grid-cols-12 bg-cyan-700 p-3 justify-start">
+    <div class="grid grid-cols-12 bg-cyan-700 mt-3 p-3 justify-start">
       <div class="grid col-span-3 text-white">
         <div class="flex flex-col items-center">
           <h2 class="lg:text-3xl text-center">Nascer do Sol</h2>
@@ -41,15 +43,19 @@
             <h2 class="lg:text-3xl text-center">Índice UV</h2>
             <i class="text-3xl bi bi-thermometer-sun"></i>
           </div>
-          <div class="flex gap-2 justify-center">
-            <span
-              class="flex justify-center items-center text-3xl {{
-                local.uvLevel(local.getClima().data[0].uv).cor
-              }} w-10 h-10 rounded-md"
-              >{{ local.getClima().data[0].uv }}</span
-            >
+          <div class="flex justify-center items-baseline">
+            <div class="flex flex-col-reverse items-center">
+              <span class="text-2xl">{{ local.uvLevel(local.getClima().data[0].uv).nivel }}</span>
+              <span
+                class="flex justify-center items-center text-3xl {{
+                  local.uvLevel(local.getClima().data[0].uv).cor
+                }} w-12 h-12 rounded-md"
+                >{{ local.getClima().data[0].uv }}
+              </span>
+            </div>
+
             <button
-              class="text-neutral-50 cursor-pointer hover:text-neutral-200"
+              class="text-neutral-50 cursor-help hover:text-neutral-200"
               (click)="openModalUV(local.uvLevel(local.getClima().data[0].uv))"
             >
               <i class="text-2xl bi bi-info-circle-fill"></i>
@@ -71,6 +77,74 @@
         </div>
       </div>
     </div>
+
+    <div class="grid grid-cols-5 xl:grid-cols-10">
+      <!--Primeira parte-->
+      <div class="grid col-span-5 bg-cyan-900 p-2">
+        <div class="grid grid-cols-3 text-white">
+          <div class="grid col-span-2">
+            <div class="flex flex-col items-center">
+              <h2 class="text-2xl lg:text-3xl">Ventos</h2>
+              <i class="text-6xl bi bi-cloud-haze2"></i>
+              <div class="flex lg:text-2xl flex-col">
+                <span>Velocidade: {{ local.getClima().data[0].wind_spd }} m/s</span>
+                <span>Rajadas: {{ local.getClima().data[0].gust }} m/s</span>
+                <span
+                  >Direção: {{ local.directionFull(local.getClima().data[0].wind_cdir) }} ({{
+                    local.directionS(local.getClima().data[0].wind_cdir)
+                  }}) - {{ local.getClima().data[0].wind_dir }}°</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="grid col-span-1">
+            <div class="flex flex-col items-center">
+              <h2 class="text-2xl lg:text-3xl text-center">Cobertura de nuvens</h2>
+              <i class="text-6xl bi bi-cloud-sun-fill"></i>
+              <h3 class="font-semibold text-2xl">{{ local.getClima().data[0].clouds }}%</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Segunda Parte-->
+      <div class=" grid col-span-5 bg-cyan-800 p-2">
+        <div class="grid grid-cols-3 text-white">
+          <div class="grid col-span-2">
+            <div class="flex flex-col items-center">
+              <h2 class="text-2xl lg:text-3xl">Qualidade do ar</h2>
+              <i class="text-6xl bi bi-wind"></i>
+              <div class="flex items-center gap-3">
+                <button
+                  class="text-neutral-50 cursor-help hover:text-neutral-200"
+                  (click)="openModalAr(local.airLevel(local.getClima().data[0].aqi))"
+                >
+                  <i class="text-3xl bi bi-info-circle-fill"></i>
+                </button>
+                <span
+                  class="flex justify-center items-center text-3xl {{
+                    local.airLevel(local.getClima().data[0].aqi).cor
+                  }} w-12 h-12 rounded-md"
+                  >{{ local.getClima().data[0].aqi }}</span
+                >
+                <span class="text-2xl">{{
+                  local.airLevel(local.getClima().data[0].aqi).nivel
+                }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="grid col-span-1">
+            <div class="flex flex-col items-center">
+              <h2 class="text-2xl lg:text-3xl">Precipitação</h2>
+              <i class="text-6xl bi bi-cloud-rain-fill"></i>
+              <span class="text-2xl lg:text-3xl">{{local.getClima().data[0].precip}} mm/h</span>
+              <span class=" lg:text-3xl">{{local.chuvaLevel(local.getClima().data[0].precip)}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     } @else {
     <h1 class="text-4xl text-center text-white font-semibold">Selecione uma cidade</h1>
     <img class="pointer-events-none" src="img/images.png" alt="Teste" />

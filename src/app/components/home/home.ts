@@ -1,7 +1,8 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, } from '@angular/core';
 import Local, { IUvDados } from '../models/Local';
 import { Dialog } from '@angular/cdk/dialog'
 import { ModalUv } from '../modal-uv/modal-uv';
+import { ModalAr } from '../modal-ar/modal-ar';
 
 @Component({
   selector: 'app-home',
@@ -12,13 +13,20 @@ import { ModalUv } from '../modal-uv/modal-uv';
 export class Home {
   //@Input() local = new Local();
   public local = new Local(true); // Para desenvolvimento apenas
-  private dialog = inject(Dialog);
+  private dialogUV = inject(Dialog);
+  private dialogAr = inject(Dialog);
+
+  public sectionFirst: boolean = true;
+  public sectionSecond: boolean = true;
 
   public openModalUV(dadoUV: IUvDados) {
-    this.dialog.open(ModalUv, {
+    this.dialogUV.open(ModalUv, {
       data: dadoUV
-    })
+    });
   }
-
-
+  public openModalAr(dadoAr: IUvDados) {
+    this.dialogAr.open(ModalAr, {
+      data: dadoAr
+    });
+  }
 }

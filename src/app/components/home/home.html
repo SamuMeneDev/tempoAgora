@@ -1,31 +1,49 @@
 <div class="bg-cyan-600 flex flex-col p-6 items-center">
-  <div class="flex flex-col items-center gap-2">
+  <div class="flex flex-col items-center gap-3">
     @if(local.isStatus()) {
     <h1 class="text-4xl text-center text-white font-semibold">
-      Tempo para {{ local.getCidade().nome }} - {{local.getEstado().sigla}}
+      Tempo para {{ local.getCidade().nome }} - {{ local.getEstado().sigla }}
     </h1>
     <h2 class="text-3xl text-white">{{ local.getClima().data[0].weather.description }}</h2>
     <div class="flex items-center gap-6">
-      <div class="flex">
-        <span class="text-5xl font-bold text-white"
-          >{{ local.getClima().data[0].temp.toFixed(0) }}°C</span
-        >
-        <i class="text-white text-5xl bi bi-thermometer-half"></i>
+      <div class="flex text-white">
+        <span class="text-5xl font-bold">{{ local.getClima().data[0].temp.toFixed(0) }}°C</span>
+        <i class="text-5xl bi bi-thermometer-half"></i>
       </div>
-      <img
-        src="https://cdn.weatherbit.io/static/img/icons/{{
-          local.getClima().data[0].weather.icon
-        }}.png"
-        class="w-20"
-      />
+      <img src="/img/icons/{{ local.getClima().data[0].weather.icon }}.png" class="w-20" />
     </div>
     <div class="flex flex-10">
       <span class="text-white text-center font-semibold text-3xl"
         >Sensação térmica de {{ local.getClima().data[0].app_temp.toFixed(0) }}°C</span
       >
     </div>
+    <div class="grid grid-cols-6">
+      <div class="grid col-span-2 text-white">
+        <div class="flex flex-col items-center">
+          <h2 class="lg:text-3xl text-center">Por do Sol</h2>
+          <i class="text-amber-500 text-5xl md:text-7xl bi bi-sunset-fill"></i>
+          <div class="flex items-center gap-2">
+            <span class="font-bold text-2xl">{{ local.parseTime(local.getClima().data[0].sunset) }}</span>
+            <i class="md:text-2xl bi bi-clock"></i>
+          </div>
+        </div>
+      </div>
+      <div class="grid col-span-1 text-white text-center">
+        <div class="flex flex-col">
+          <div class="flex gap-2 items-start">
+            <h2 class="lg:text-3xl text-center">Índice UV</h2>
+            <i class="text-3xl bi bi-thermometer-sun"></i>
+          </div>
+          <div class="flex gap-3 justify-center">
+            <span class="text-3xl " >{{ local.getClima().data[0].uv }}</span>
+            <button class="cursor-pointer"><i class="text-2xl bi bi-info-circle-fill"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
     } @else {
     <h1 class="text-4xl text-center text-white font-semibold">Selecione uma cidade</h1>
+    <img src="img/images.png" alt="Teste" />
     }
   </div>
 </div>

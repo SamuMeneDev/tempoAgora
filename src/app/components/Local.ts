@@ -46,4 +46,3 @@ export default class Local {
     this.setStatus(false);
   }
 }
-//  http://api.weatherbit.io/v2.0/current?lang=pt&key=9eef1c8cc39f4367871d5becaa7e5625&include=minutely&city=Sao+Paulo

@@ -67,6 +67,7 @@ export class Busca {
   public buscarTempo() {
     if (this.local.getCidade().id !== -1 && this.local.getEstado().id !== -1) {
       this.local.setStatus(true);
+      this.local.queryClima();
     } else {
       this.local.setStatus(false);
     }

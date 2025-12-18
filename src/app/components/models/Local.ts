@@ -1,9 +1,12 @@
 import Cidade from './Cidade';
 import Estado from './Estado';
+import { environment } from '../../../environments/environment';
 export default class Local {
   private estado!: Estado;
   private cidade!: Cidade;
   private status: boolean = false;
+  private clima!: Clima;
+
   constructor() {
     this.reset();
   }
@@ -49,5 +52,18 @@ export default class Local {
       nome: '',
     };
     this.setStatus(false);
+  }
+  public queryClima() {
+    if (this.isStatus()) {
+      const dados = Local.requisicao(
+        `http://api.weatherbit.io/v2.0/current?key=${environment.API_KEY}&lang=pt&city=${
+          this.getCidade().nome
+        }&country=BR`
+      );
+      this.clima = JSON.parse(dados);
+    }
+  }
+  public getClima(): Clima {
+    return this.clima;
   }
 }

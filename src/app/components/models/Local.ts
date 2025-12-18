@@ -38,6 +38,7 @@ export default class Local {
       dica: 'Risco extremo. Evite exposição ao sol a todo custo. Mesmo curtos períodos causam queimaduras graves',
     },
   ];
+  private queryDate!: Date;
   public constructor(template?: boolean) {
     if (template) {
       // Template para não consumir a API
@@ -76,6 +77,7 @@ export default class Local {
           },
         ],
       };
+      this.setQueryDate(this.formatDate());
       this.status = true;
     } else {
       this.reset();
@@ -177,6 +179,7 @@ export default class Local {
         }&country=BR`
       );
       this.clima = JSON.parse(dados);
+      this.setQueryDate(this.formatDate());
     }
   }
   public getClima(): Clima {
@@ -258,16 +261,27 @@ export default class Local {
     }
   }
   public chuvaLevel(chuva: number): string {
-    if(chuva <= 0) {
-      return "Sem chuva prevista";
+    if (chuva <= 0) {
+      return 'Sem chuva prevista';
     } else if (chuva <= 2.5) {
-      return "Chuva Fraca";
-    }  else if(chuva <= 10) {
-      return "Chuva Moderada";
-    } else if(chuva <= 50) {
-      return "Chuva Forte";
+      return 'Chuva Fraca';
+    } else if (chuva <= 10) {
+      return 'Chuva Moderada';
+    } else if (chuva <= 50) {
+      return 'Chuva Forte';
     } else {
-      return "Chuva Muito Forte/Violenta";
+      return 'Chuva Muito Forte/Violenta';
     }
+  }
+  private setQueryDate(date: Date) {
+    this.queryDate = date;
+  }
+  public getQueryDate(): Date {
+    return this.queryDate;
+  }
+  private formatDate(): Date { // Transforma string em Date
+    let dateTime = this.clima.data[0].ob_time.split(' ');
+    const formatDate = new Date(dateTime[0] + 'T' + dateTime[1] + ':00');
+    return formatDate;
   }
 }

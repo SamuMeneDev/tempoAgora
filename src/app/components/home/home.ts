@@ -1,6 +1,6 @@
-import { Component, inject, Input, } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import Local, { IUvDados } from '../models/Local';
-import { Dialog } from '@angular/cdk/dialog'
+import { Dialog } from '@angular/cdk/dialog';
 import { ModalUv } from '../modal-uv/modal-uv';
 import { ModalAr } from '../modal-ar/modal-ar';
 
@@ -16,17 +16,21 @@ export class Home {
   private dialogUV = inject(Dialog);
   private dialogAr = inject(Dialog);
 
-  public sectionFirst: boolean = true;
-  public sectionSecond: boolean = true;
+  public dateConfig: {} = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  };
 
   public openModalUV(dadoUV: IUvDados) {
     this.dialogUV.open(ModalUv, {
-      data: dadoUV
+      data: dadoUV,
     });
   }
   public openModalAr(dadoAr: IUvDados) {
     this.dialogAr.open(ModalAr, {
-      data: dadoAr
+      data: dadoAr,
     });
   }
 }

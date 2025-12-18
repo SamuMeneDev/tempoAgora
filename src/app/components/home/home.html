@@ -1,4 +1,4 @@
-<div class="bg-cyan-600 flex flex-col">
+<div class="bg-cyan-600 flex flex-col justify-start pt-10">
   <div class="flex flex-col pt-3">
     @if(local.isStatus()) {
     <!-- Nome e tempo da Cidade -->
@@ -144,7 +144,9 @@
         </div>
       </div>
     </div>
-
+    <div class="flex justify-center">
+      <h1 class="font-semibold text-center text-white">Data da observação: {{local.getQueryDate().toLocaleDateString('pt-br', dateConfig)}}</h1>
+    </div>
     } @else {
     <h1 class="text-4xl text-center text-white font-semibold">Selecione uma cidade</h1>
     <img class="pointer-events-none" src="img/images.png" alt="Teste" />

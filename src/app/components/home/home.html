@@ -1,6 +1,7 @@
 <div class="bg-cyan-600 flex flex-col p-6 items-center">
   <div class="flex flex-col items-center gap-3">
     @if(local.isStatus()) {
+    <!-- Nome e tempo da Cidade -->
     <h1 class="text-4xl text-center text-white font-semibold">
       Tempo para {{ local.getCidade().nome }} - {{ local.getEstado().sigla }}
     </h1>
@@ -17,33 +18,67 @@
         >Sensação térmica de {{ local.getClima().data[0].app_temp.toFixed(0) }}°C</span
       >
     </div>
-    <div class="grid grid-cols-6">
-      <div class="grid col-span-2 text-white">
+
+    <!-- Outros detalhes -->
+
+    <div class="grid grid-cols-12 justify-start">
+      <div class="grid col-span-4 text-white">
         <div class="flex flex-col items-center">
-          <h2 class="lg:text-3xl text-center">Por do Sol</h2>
-          <i class="text-amber-500 text-5xl md:text-7xl bi bi-sunset-fill"></i>
+          <h2 class="lg:text-3xl text-center">Nascer do Sol</h2>
+          <i class="text-amber-500 text-5xl md:text-7xl bi bi-sunrise-fill"></i>
+
           <div class="flex items-center gap-2">
-            <span class="font-bold text-2xl">{{ local.parseTime(local.getClima().data[0].sunset) }}</span>
+            <span class="font-bold text-2xl">{{
+              local.parseTime(local.getClima().data[0].sunrise)
+            }}</span>
             <i class="md:text-2xl bi bi-clock"></i>
           </div>
         </div>
       </div>
-      <div class="grid col-span-1 text-white text-center">
-        <div class="flex flex-col">
+      <div class="grid col-span-5 text-white text-center">
+        <div class="flex flex-col items-center">
           <div class="flex gap-2 items-start">
             <h2 class="lg:text-3xl text-center">Índice UV</h2>
             <i class="text-3xl bi bi-thermometer-sun"></i>
           </div>
-          <div class="flex gap-3 justify-center">
-            <span class="text-3xl " >{{ local.getClima().data[0].uv }}</span>
-            <button class="cursor-pointer"><i class="text-2xl bi bi-info-circle-fill"></i></button>
+          <div class="flex gap-2 justify-center">
+            <span
+              class="flex justify-center items-center text-3xl {{
+                local.uvLevel(local.getClima().data[0].uv).cor
+              }} w-10 h-10 rounded-md"
+              >{{ local.getClima().data[0].uv }}</span
+            >
+            <button
+              (click)="abrirModalUV(modal)"
+              class="text-neutral-50 cursor-pointer hover:text-neutral-200"
+            >
+              <i class="text-2xl bi bi-info-circle-fill"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="grid col-span-3 text-white">
+        <div class="flex flex-col items-center">
+          <h2 class="lg:text-3xl text-center">Por do Sol</h2>
+          <i class="text-amber-500 text-5xl md:text-7xl bi bi-sunset-fill"></i>
+
+          <div class="flex items-center gap-2">
+            <span class="font-bold text-2xl">{{
+              local.parseTime(local.getClima().data[0].sunset)
+            }}</span>
+            <i class="md:text-2xl bi bi-clock"></i>
           </div>
         </div>
       </div>
     </div>
     } @else {
     <h1 class="text-4xl text-center text-white font-semibold">Selecione uma cidade</h1>
-    <img src="img/images.png" alt="Teste" />
+    <img class="pointer-events-none" src="img/images.png" alt="Teste" />
     }
   </div>
+  <dialog #modal>
+    <div class="flex">
+      <h1 class="text-5xl">Teste Modal</h1>
+    </div>
+  </dialog>
 </div>

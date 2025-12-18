@@ -13,33 +13,66 @@ export default class Local {
   private clima!: Clima;
   private uvDados: IUvDados[] = [
     {
-      cor: '',
+      cor: 'bg-green-500',
       nivel: 'Baixo',
       dica: 'Nenhuma precaução necessária. Procure uma combra nas horas próximas ao meio-dia.',
     },
     {
-      cor: '',
+      cor: 'bg-amber-200 text-stone-700',
       nivel: 'Moderado',
       dica: 'Em horários próximos ao meio-dia, procure locais sombreados. Procure usar camisa e boné. User o protetor solar.',
     },
     {
-      cor: '',
+      cor: 'text-neutral-700 bg-yellow-500',
       nivel: 'Alto',
       dica: 'Risco Alto. User protetor solar FPS alto, em horários próximos ao meio-dia, procure locais sombreados. Procure usar camisa, boné e óculos de sol.',
     },
     {
-      cor: '',
+      cor: 'bg-red-600',
       nivel: 'Muito Alto',
-      dica: 'Risco muito alto. Evite o sol em horários próximos ao meio-dia, use protetor FPS 50+, chapéu, óculos de sol e roupa'
+      dica: 'Risco muito alto. Evite o sol em horários próximos ao meio-dia, use protetor FPS 50+, chapéu, óculos de sol e roupa',
     },
     {
-      cor: '',
+      cor: 'bg-violet-800',
       nivel: 'Extremo',
-      dica: 'Risco extremo. Evite exposição ao sol a todo custo. Mesmo curtos períodos causam queimaduras graves'
-    }
+      dica: 'Risco extremo. Evite exposição ao sol a todo custo. Mesmo curtos períodos causam queimaduras graves',
+    },
   ];
-  constructor() {
-    this.reset();
+  public constructor(template?: boolean) {
+    
+    if (template) { // Template para não consumir a API
+      this.estado = {
+        id: 0,
+        nome: 'São Paulo',
+        sigla: 'SP',
+      };
+      this.cidade = {
+        id: 100,
+        nome: 'São Paulo',
+      };
+      this.clima = {
+        data: [
+          {
+            app_temp: 24.25,
+            clouds: 75,
+            country_code: 'BR',
+            ob_time: '2017-08-28 16:45',
+            sunrise: '10:44',
+            sunset: '23:47',
+            temp: 24.19,
+            uv: 2,
+            weather: {
+              code: 803,
+              description: 'Broken clouds',
+              icon: 'c03d',
+            },
+          },
+        ],
+      };
+      this.status = true;
+    } else {
+      this.reset();
+    }
   }
   public static requisicao(url: string) {
     const request = new XMLHttpRequest();
@@ -117,17 +150,20 @@ export default class Local {
     return time.join(':');
   }
   public uvLevel(uv: number): IUvDados {
-    switch (uv) {
-      case 0:
-      case 1:
-      case 2:
+    if (uv >= 0) {
+      if (uv < 3) {
         return this.uvDados[0];
-      case 3:
-      case 4:
-      case 5:
+      } else if (uv < 6) {
         return this.uvDados[1];
-      default:
-        throw new Error('Tipo nao existente');
+      } else if (uv < 8) {
+        return this.uvDados[2];
+      } else if (uv < 11) {
+        return this.uvDados[3];
+      } else {
+        return this.uvDados[4];
+      }
+    } else {
+      throw new Error('Parâmetro inválido na função');
     }
   }
 }

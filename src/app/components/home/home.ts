@@ -8,5 +8,11 @@ import Local from '../models/Local';
   styleUrl: './home.css',
 })
 export class Home {
-  @Input() local = new Local();
+  //@Input() local = new Local();
+  public local = new Local(true); // Para desenvolvimento apenas
+
+  public abrirModalUV(modal: HTMLDialogElement) {
+    modal.showModal();
+  }
+
 }

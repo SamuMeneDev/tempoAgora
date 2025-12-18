@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import Local from '../Local';
+import Local from '../models/Local';
 
 @Component({
   selector: 'app-home',

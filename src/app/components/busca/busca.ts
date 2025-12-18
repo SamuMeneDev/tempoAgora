@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import Local from '../Local';
+import Local from '../models/Local';
 import Estado from '../models/Estado';
 import Cidade from '../models/Cidade';
 import { Home } from '../home/home';
@@ -16,7 +16,7 @@ export class Busca {
   local = new Local();
   constructor() {
     const dados = JSON.parse(
-      this.requisicao('https://servicodados.ibge.gov.br/api/v1/localidades/estados')
+      Local.requisicao('https://servicodados.ibge.gov.br/api/v1/localidades/estados')
     );
     this.estados = dados;
   }
@@ -31,11 +31,11 @@ export class Busca {
     if (id != -1) {
       this.local.setEstado(
         JSON.parse(
-          this.requisicao(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${idParse}`)
+          Local.requisicao(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${idParse}`)
         )
       );
       const dados = JSON.parse(
-        this.requisicao(
+        Local.requisicao(
           `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${idParse}/municipios`
         )
       );
@@ -54,23 +54,21 @@ export class Busca {
     }
     if (id != -1) {
       const dados: Cidade = JSON.parse(
-        this.requisicao(`https://servicodados.ibge.gov.br/api/v1/localidades/municipios/${idParse}`)
+        Local.requisicao(`https://servicodados.ibge.gov.br/api/v1/localidades/municipios/${idParse}`)
       );
       this.local.setCidade(dados);
     } else {
       this.local.resetCid();
     }
+    this.local.setStatus(false);
   }
-  public requisicao(url: string) {
-    const request = new XMLHttpRequest();
-    request.open('GET', url, false);
-    request.send();
-    return request.responseText;
-  }
+  
 
   public buscarTempo() {
-    if(this.local.getCidade().id !== -1 && this.local.getEstado().id !== -1) {
+    if (this.local.getCidade().id !== -1 && this.local.getEstado().id !== -1) {
       this.local.setStatus(true);
-    } else { this.local.setStatus(false) }
+    } else {
+      this.local.setStatus(false);
+    }
   }
 }

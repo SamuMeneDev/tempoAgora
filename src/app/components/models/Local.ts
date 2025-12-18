@@ -1,5 +1,5 @@
-import Cidade from './models/Cidade';
-import Estado from './models/Estado';
+import Cidade from './Cidade';
+import Estado from './Estado';
 export default class Local {
   private estado!: Estado;
   private cidade!: Cidade;
@@ -7,7 +7,12 @@ export default class Local {
   constructor() {
     this.reset();
   }
-
+  public static requisicao(url: string) {
+    const request = new XMLHttpRequest();
+    request.open('GET', url, false);
+    request.send();
+    return request.responseText;
+  }
   public setEstado(uf: Estado) {
     this.estado = uf;
   }

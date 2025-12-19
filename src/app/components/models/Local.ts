@@ -83,50 +83,6 @@ export default class Local {
       this.reset();
     }
   }
-  public directionFull(sigla: string): string {
-    switch (sigla) {
-      case 'N':
-        return 'Norte';
-      case 'NE':
-        return 'Nordeste';
-      case 'E':
-        return 'Leste';
-      case 'SE':
-        return 'Sudeste';
-      case 'S':
-        return 'Sul';
-      case 'SW':
-        return 'Sudoeste';
-      case 'W':
-        return 'Oeste';
-      case 'NW':
-        return 'Noroeste';
-      default:
-        throw new Error('Ponto inválido');
-    }
-  }
-  public directionS(sigla: string): string {
-    switch (sigla) {
-      case 'N':
-        return sigla;
-      case 'NE':
-        return sigla;
-      case 'E':
-        return sigla;
-      case 'SE':
-        return sigla;
-      case 'S':
-        return sigla;
-      case 'SW':
-        return 'SO';
-      case 'W':
-        return 'O';
-      case 'NW':
-        return 'NO';
-      default:
-        throw new Error('Ponto inválido');
-    }
-  }
 
   public static requisicao(url: string) {
     const request = new XMLHttpRequest();
@@ -281,7 +237,7 @@ export default class Local {
   }
   private formatDate(): Date { // Transforma string em Date
     let dateTime = this.clima.data[0].ob_time.split(' ');
-    const formatDate = new Date(dateTime[0] + 'T' + dateTime[1] + ':00');
+    const formatDate = new Date(dateTime[0] + 'T' + this.parseTime(dateTime[1]) + ':00');
     return formatDate;
   }
 }

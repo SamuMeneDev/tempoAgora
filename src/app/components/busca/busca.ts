@@ -43,6 +43,7 @@ export class Busca {
     } else {
       this.local.reset();
     }
+    this.local.setStatus(false);
   }
 
   public saveCidade(id: number | string) {

@@ -1,4 +1,4 @@
-<div class="grid sm:grid-cols-2 lg:grid-cols-3 sm:h-screen">
+<div class="grid sm:grid-cols-2 lg:grid-cols-3 h-screen">
   <div class="grid lg:col-span-1">
     <div class="flex self-center flex-col gap-3 flex-9/12">
       <div class="flex flex-col items-center">
@@ -32,11 +32,11 @@
         Buscar
       </button>
     </div>
-    <footer class="flex self-end">
+    <footer class="flex p-2.5 items-center justify-between self-end">
       <h1>@SamuMeneDev - {{ dataAtual.getFullYear() }}</h1>
+      <a class="cursor-pointer" target="_blank" href="https://github.com/SamuMeneDev"><i class="text-3xl bi bi-github"></i></a>
     </footer>
   </div>
 
-  <app-home class="grid sm:col-span-1 lg:col-span-2" />
+  <app-home class="grid sm:col-span-1 lg:col-span-2" [local]="local" />
 </div>
-<!--[local]="local"   para bindar o objeto entre os components--> 

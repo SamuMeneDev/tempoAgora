@@ -6,8 +6,19 @@
     <div class="flex justify-center items-center gap-3">
       <h2 class="text-4xl">Descrição</h2>
       <i class="text-3xl text-amber-500 bi bi-exclamation-triangle-fill"></i>
+      <a
+        class="flex justify-center items-center w-7 h-7 rounded-md hover:bg-stone-200"
+        href="https://www.msdmanuals.com/pt/casa/multimedia/table/%C3%ADndice-de-qualidade-do-ar"
+        target="_blank"
+        ><i class="text-2xl bi bi-link-45deg"></i
+      ></a>
     </div>
     <p class="sm:text-2xl text-center sm:w-2xl">{{ data.dica }}</p>
   </div>
-  <button (click)="fecharModalAr()" class="cursor-pointer hover:bg-cyan-400 text-white rounded-b-lg p-2 bg-cyan-500 text-2xl">Entendi</button>
+  <button
+    (click)="fecharModalAr()"
+    class="cursor-pointer hover:bg-cyan-400 text-white rounded-b-lg p-2 bg-cyan-500 text-2xl"
+  >
+    Entendi
+  </button>
 </div>

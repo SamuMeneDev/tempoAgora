@@ -1,6 +1,7 @@
 import Cidade from './Cidade';
 import Estado from './Estado';
-import { environment } from '../../../environments/environment';
+//import { environment } from '../../../environments/environment';
+
 export interface IUvDados {
   cor: string;
   nivel: string;
@@ -175,7 +176,7 @@ export default class Local {
   public queryClima() {
     if (this.isStatus()) {
       const dados = Local.requisicao(
-        `http://api.weatherbit.io/v2.0/current?key=${environment.API_KEY}&lang=pt&city=${
+        `http://api.weatherbit.io/v2.0/current?key=${process.env['API_KEY']}&lang=pt&city=${
           this.getCidade().nome
         }&country=BR`
       );

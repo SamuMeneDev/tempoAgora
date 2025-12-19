@@ -5,7 +5,9 @@ export interface IUvDados {
   cor: string;
   nivel: string;
   dica: string;
+  indice: string;
 }
+
 export default class Local {
   private estado!: Estado;
   private cidade!: Cidade;
@@ -16,26 +18,69 @@ export default class Local {
       cor: 'bg-green-500 text-white',
       nivel: 'Baixo',
       dica: 'Nenhuma precaução necessária. Procure uma sombra nas horas próximas ao meio-dia.',
+      indice: '1 a 2',
     },
     {
       cor: 'bg-amber-200 text-stone-700',
       nivel: 'Moderado',
       dica: 'Em horários próximos ao meio-dia, procure locais sombreados. Procure usar camisa e boné. User o protetor solar.',
+      indice: '3 a 5',
     },
     {
       cor: 'text-neutral-700 bg-yellow-500',
       nivel: 'Alto',
       dica: 'Risco Alto. User protetor solar FPS alto, em horários próximos ao meio-dia, procure locais sombreados. Procure usar camisa, boné e óculos de sol.',
+      indice: '6 a 7',
     },
     {
       cor: 'bg-red-600 text-white',
       nivel: 'Muito Alto',
       dica: 'Risco muito alto. Evite o sol em horários próximos ao meio-dia, use protetor FPS 50+, chapéu, óculos de sol e roupa',
+      indice: '8 a 10',
     },
     {
       cor: 'bg-violet-800 text-white',
       nivel: 'Extremo',
       dica: 'Risco extremo. Evite exposição ao sol a todo custo. Mesmo curtos períodos causam queimaduras graves',
+      indice: '11+',
+    },
+  ];
+  private airDados: IUvDados[] = [
+    {
+      cor: 'bg-green-600 text-white',
+      nivel: 'Bom',
+      dica: 'Qualidade satisfatória, pouco ou nenhum risco à saúde',
+      indice: '0 a 50',
+    },
+    {
+      cor: 'bg-yellow-400 text-stone-800',
+      nivel: 'Moderado',
+      dica: 'Aceitável, mas pode haver risco para pessoas sensíveis (ozônio, particulados).',
+      indice: '51 a 100',
+    },
+    {
+      cor: 'bg-orange-600 text-white',
+      nivel: 'Alerta para grupos sensíveis',
+      dica: 'Efeitos na saúde para pessoas sensíveis; o público em geral não é afetado.',
+      indice: '101 a 150',
+    },
+    {
+      cor: 'bg-red-600 text-white',
+      nivel: 'Pouvo saudável',
+      dica: 'Efeitos para toda a população; grupos sensíveis sofrem mais.',
+      indice: '151 a 200',
+    },
+    {
+      cor: 'bg-purple-600 text-white',
+      nivel: 'Muito insalubre',
+      dica: 'Alerta de saúde de emergência; todos são afetados.',
+      indice: '201 a 300',
+    },
+    {
+      cor: 'bg-red-950 text-white',
+      nivel: 'Perigoso',
+      dica: 'Condições de emergência; risco sério à saúde para todos',
+      indice: '301 a 500',
     },
   ];
   private queryDate!: Date;
@@ -64,7 +109,7 @@ export default class Local {
             precip: 2,
             wind_spd: 6.17,
             gust: 8,
-            uv: 8,
+            uv: 11,
             aqi: 45,
             wind_cdir_full: 'northeast',
             wind_cdir: 'NE',
@@ -177,43 +222,25 @@ export default class Local {
       throw new Error('Parâmetro inválido na função');
     }
   }
+  public getAirDados(): IUvDados[] {
+    return this.airDados;
+  }
+  public getUVDados(): IUvDados[] {
+    return this.uvDados;
+  }
   public airLevel(air: number): IUvDados {
     if (air < 51) {
-      return {
-        cor: 'bg-green-600 text-white',
-        nivel: 'Bom',
-        dica: 'Qualidade satisfatória, pouco ou nenhum risco à saúde',
-      };
+      return this.airDados[0];
     } else if (air < 101) {
-      return {
-        cor: 'bg-yellow-400 text-stone-800',
-        nivel: 'Moderado',
-        dica: 'Aceitável, mas pode haver risco para pessoas sensíveis (ozônio, particulados).',
-      };
+      return this.airDados[1];
     } else if (air < 151) {
-      return {
-        cor: 'bg-orange-600 text-white',
-        nivel: 'Alerta para grupos sensíveis',
-        dica: 'Efeitos na saúde para pessoas sensíveis; o público em geral não é afetado.',
-      };
+      return this.airDados[2];
     } else if (air < 201) {
-      return {
-        cor: 'bg-red-600 text-white',
-        nivel: 'Pouvo saudável',
-        dica: 'Efeitos para toda a população; grupos sensíveis sofrem mais.',
-      };
+      return this.airDados[3];
     } else if (air < 301) {
-      return {
-        cor: 'bg-purple-600 text-white',
-        nivel: 'Muito insalubre',
-        dica: 'Alerta de saúde de emergência; todos são afetados.',
-      };
+      return this.airDados[4];
     } else {
-      return {
-        cor: 'bg-red-950 text-white',
-        nivel: 'Perigoso',
-        dica: 'Condições de emergência; risco sério à saúde para todos',
-      };
+      return this.airDados[5];
     }
   }
   public chuvaLevel(chuva: number): string {
@@ -235,7 +262,8 @@ export default class Local {
   public getQueryDate(): Date {
     return this.queryDate;
   }
-  private formatDate(): Date { // Transforma string em Date
+  private formatDate(): Date {
+    // Transforma string em Date
     let dateTime = this.clima.data[0].ob_time.split(' ');
     const formatDate = new Date(dateTime[0] + 'T' + this.parseTime(dateTime[1]) + ':00');
     return formatDate;

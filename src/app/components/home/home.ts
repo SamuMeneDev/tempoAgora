@@ -11,8 +11,8 @@ import { ModalAr } from '../modal-ar/modal-ar';
   styleUrl: './home.css',
 })
 export class Home {
-  @Input() local = new Local();
-  //public local = new Local(true); // Para desenvolvimento apenas
+  //@Input() local = new Local();
+  public local = new Local(true); // Para desenvolvimento apenas
   private dialogUV = inject(Dialog);
   private dialogAr = inject(Dialog);
 
@@ -23,14 +23,14 @@ export class Home {
     day: 'numeric',
   };
 
-  public openModalUV(dadoUV: IUvDados) {
+  public openModalUV(local: Local) {
     this.dialogUV.open(ModalUv, {
-      data: dadoUV,
+      data: local,
     });
   }
-  public openModalAr(dadoAr: IUvDados) {
+  public openModalAr(local: Local) {
     this.dialogAr.open(ModalAr, {
-      data: dadoAr,
+      data: local,
     });
   }
 }

@@ -13,7 +13,7 @@ export class Busca {
   estados!: Array<Estado>;
   cidades!: Array<Cidade>;
   dataAtual = new Date();
-  local = new Local();
+  local = new Local(false); // true para testes
   constructor() {
     const dados = JSON.parse(
       Local.requisicao('https://servicodados.ibge.gov.br/api/v1/localidades/estados')
@@ -68,8 +68,9 @@ export class Busca {
   public buscarTempo() {
     if (this.local.getCidade().id !== -1 && this.local.getEstado().id !== -1) {
       this.local.setStatus(true);
-      this.local.queryClima();
+      this.local.queryClima(); //destivado para teste
     } else {
+      //this.local.setStatus(true); // Para teste
       this.local.setStatus(false);
     }
   }

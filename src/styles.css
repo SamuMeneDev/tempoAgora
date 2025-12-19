@@ -5,3 +5,11 @@
 * {
   font-family: 'Gabarito', sans-serif;
 }
+@keyframes slide-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

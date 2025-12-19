@@ -123,7 +123,7 @@ export default class Local {
         ],
       };
       this.setQueryDate(this.formatDate());
-      this.status = true;
+      this.status = false;
     } else {
       this.reset();
     }

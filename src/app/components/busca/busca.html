@@ -34,10 +34,24 @@
     </div>
     <footer class="flex p-2.5 items-center justify-between self-end">
       <h1>@SamuMeneDev - {{ dataAtual.getFullYear() }}</h1>
-      <a class="cursor-pointer" target="_blank" href="https://github.com/SamuMeneDev"><i class="text-3xl bi bi-github"></i></a>
+      <div class="flex gap-2.5">
+        <a
+          class="cursor-pointer"
+          title="Meu GitHub"
+          target="_blank"
+          href="https://github.com/SamuMeneDev"
+          ><i class="text-3xl bi bi-github"></i
+        ></a>
+        <a
+          class="cursor-pointer"
+          title="Meu LinkedIn"
+          target="_blank"
+          href="https://www.linkedin.com/in/samuel-isidro-santiago-aba1b131b/"
+          ><i class="text-3xl bi bi-linkedin"></i
+        ></a>
+      </div>
     </footer>
   </div>
 
-  <app-home class="grid sm:col-span-1 lg:col-span-2"/>
+  <app-home class="grid sm:col-span-1 lg:col-span-2" [local]="local" />
 </div>
-<!--[local]="local"-->

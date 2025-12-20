@@ -176,7 +176,7 @@ export default class Local {
   public queryClima() {
     if (this.isStatus()) {
       const dados = Local.requisicao(
-        `http://api.weatherbit.io/v2.0/current?key=${environment.API_KEY}&lang=pt&city=${
+        `https://api.weatherbit.io/v2.0/current?key=${environment.API_KEY}&lang=pt&city=${
           this.getCidade().nome
         }&country=BR`
       );

@@ -1,6 +1,6 @@
 import Cidade from './Cidade';
 import Estado from './Estado';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../environments/environment.development';
 
 export interface IUvDados {
   cor: string;

@@ -11,3 +11,13 @@ Site que mostra informações do clima das cidades do Brasil. Esse é o meu prim
   </a>
 </p>
 Em breve mais atualizações
+
+## 🛠 Funcionalidades
+- Temperatura do local
+- Sensação térmica
+- Índice de radiação UV (Com medidas recomendadas de cuidados)
+- Horário do Nascer e Por do sol
+- Velocidade dos ventos/rajadas e direção do local
+- Cobertura de nuvens
+- Qualidade do ar (Baseado no sistema USA AQI)
+- Taxa de precipitação

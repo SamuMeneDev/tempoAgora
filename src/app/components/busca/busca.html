@@ -31,6 +31,9 @@
       >
         Buscar
       </button>
+      @if(noMatch) {
+        <p class="self-center text-red-500">* Escolha uma cidade e/ou estado para realizar a busca</p>
+      }
     </div>
     <footer class="flex p-2.5 items-center justify-between self-end">
       <h1>@SamuMeneDev - {{ dataAtual.getFullYear() }}</h1>

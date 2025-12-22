@@ -10,6 +10,7 @@ export interface IUvDados {
 }
 
 export default class Local {
+  private teste: boolean = false;
   private estado!: Estado;
   private cidade!: Cidade;
   private status: boolean = false;
@@ -85,7 +86,8 @@ export default class Local {
     },
   ];
   private queryDate!: Date;
-  public constructor(template?: boolean) {
+  public constructor(template: boolean = false) {
+    this.teste = template;
     if (template) {
       // Template para não consumir a API
       this.estado = {
@@ -138,6 +140,9 @@ export default class Local {
   }
   public setEstado(uf: Estado) {
     this.estado = uf;
+  }
+  public isTeste(): boolean {
+    return this.teste;
   }
   public setCidade(cid: Cidade) {
     this.cidade = cid;

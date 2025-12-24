@@ -1,4 +1,4 @@
-# 🗂️ Tempo Agora v1.1 (Em desenvolvimento)
+# 🗂️ Tempo Agora v1.0
 
 Site que mostra informações do clima das cidades do Brasil. Esse é o meu primeiro projeto usando Angular, Typescript e requisições de API's.
  <strong>Espero que gostem :D, abraços <a href="https://github.com/SamuMeneDev">Samu Mene</a></strong>

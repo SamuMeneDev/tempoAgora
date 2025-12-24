@@ -1,9 +1,9 @@
 <div class="flex flex-col bg-white rounded-lg shadow-xl m-2">
   <div
-    class="flex {{ data.uvLevel(data.getClima().data[0].uv).cor }} p-2 rounded-t-lg justify-center"
+    class="flex {{ data.getClima().nivelUV().cor }} p-2 rounded-t-lg justify-center"
   >
     <h1 class="text-4xl text-center font-semibold">
-      Nivel de UV: {{ data.uvLevel(data.getClima().data[0].uv).nivel }}
+      Nivel de UV: {{ data.getClima().nivelUV().nivel }}
     </h1>
   </div>
   <div class="flex flex-col p-3">
@@ -12,10 +12,10 @@
         <th>Índice UV</th>
         <th>Situação</th>
       </tr>
-      @for (item of data.getUVDados(); track $index) {
+      @for (item of data.getClima().getUVDados(); track $index) {
       <tr class="text-left odd:bg-cyan-100">
         <td class="flex items-center">
-          {{ item.indice }} @if(data.uvLevel(data.getClima().data[0].uv).indice == item.indice) {<i
+          {{ item.indice }} @if(data.getClima().nivelUV().indice == item.indice) {<i
             class="text-2xl bi bi-caret-left-fill"
           ></i
           >}
@@ -36,7 +36,7 @@
     </div>
 
     <p class="sm:text-2xl text-center sm:w-2xl">
-      {{ data.uvLevel(data.getClima().data[0].uv).dica }}
+      {{ data.getClima().nivelUV().dica }}
     </p>
   </div>
   <button

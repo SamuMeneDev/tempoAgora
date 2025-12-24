@@ -7,18 +7,18 @@
         Tempo para {{ local.getCidade().nome }} - {{ local.getEstado().sigla }}
       </h1>
       <h2 class="text-3xl self-center text-white">
-        {{ local.getClima().data[0].weather.description }}
+        {{ local.getClima().getData().weather.description }}
       </h2>
       <div class="flex self-center items-center gap-6">
         <div class="flex text-white">
-          <span class="text-5xl font-bold">{{ local.getClima().data[0].temp.toFixed(0) }}°C</span>
+          <span class="text-5xl font-bold">{{ local.getClima().getData().temp.toFixed(0) }}°C</span>
           <i class="text-5xl bi bi-thermometer-half"></i>
         </div>
-        <img src="/img/icons/{{ local.getClima().data[0].weather.icon }}.png" class="w-20" />
+        <img src="/img/icons/{{ local.getClima().getData().weather.icon }}.png" class="w-20" />
       </div>
       <div class="flex self-center flex-10">
         <span class="text-white text-center font-semibold text-3xl"
-          >Sensação térmica de {{ local.getClima().data[0].app_temp.toFixed(0) }}°C</span
+          >Sensação térmica de {{ local.getClima().getData().app_temp.toFixed(0) }}°C</span
         >
       </div>
 
@@ -32,7 +32,7 @@
 
             <div class="flex items-center gap-2">
               <span class="font-bold text-2xl">{{
-                local.parseTime(local.getClima().data[0].sunrise)
+                this.util.parseTime(local.getClima().getData().sunrise)
               }}</span>
               <i class="md:text-2xl bi bi-clock"></i>
             </div>
@@ -46,12 +46,12 @@
             </div>
             <div class="flex justify-center items-baseline">
               <div class="flex flex-col-reverse items-center">
-                <span class="text-2xl">{{ local.uvLevel(local.getClima().data[0].uv).nivel }}</span>
+                <span class="text-2xl">{{ local.getClima().nivelUV().nivel }}</span>
                 <span
                   class="flex justify-center items-center text-3xl {{
-                    local.uvLevel(local.getClima().data[0].uv).cor
+                    local.getClima().nivelUV().cor
                   }} w-12 h-12 rounded-md"
-                  >{{ local.getClima().data[0].uv }}
+                  >{{ local.getClima().getData().uv }}
                 </span>
               </div>
 
@@ -71,7 +71,7 @@
 
             <div class="flex items-center gap-2">
               <span class="font-bold text-2xl">{{
-                local.parseTime(local.getClima().data[0].sunset)
+                this.util.parseTime(local.getClima().getData().sunset)
               }}</span>
               <i class="md:text-2xl bi bi-clock"></i>
             </div>
@@ -88,12 +88,12 @@
                 <h2 class="text-2xl lg:text-3xl">Ventos</h2>
                 <i class="text-6xl bi bi-cloud-haze2"></i>
                 <div class="flex lg:text-2xl flex-col">
-                  <span>Velocidade: {{ local.getClima().data[0].wind_spd }} m/s</span>
-                  <span>Rajadas: {{ local.getClima().data[0].gust }} m/s</span>
+                  <span>Velocidade: {{ local.getClima().getData().wind_spd }} m/s</span>
+                  <span>Rajadas: {{ local.getClima().getData().gust }} m/s</span>
                   <span class="text-center"
-                    >Direção: {{ local.getClima().data[0].wind_cdir_full }} ({{
-                      local.getClima().data[0].wind_cdir
-                    }}) - {{ local.getClima().data[0].wind_dir }}°</span
+                    >Direção: {{ local.getClima().getData().wind_cdir_full }} ({{
+                      local.getClima().getData().wind_cdir
+                    }}) - {{ local.getClima().getData().wind_dir }}°</span
                   >
                 </div>
               </div>
@@ -102,7 +102,7 @@
               <div class="flex flex-col items-center">
                 <h2 class="text-2xl lg:text-3xl text-center">Cobertura de nuvens</h2>
                 <i class="text-6xl bi bi-cloud-sun-fill"></i>
-                <h3 class="font-semibold text-2xl">{{ local.getClima().data[0].clouds }}%</h3>
+                <h3 class="font-semibold text-2xl">{{ local.getClima().getData().clouds }}%</h3>
               </div>
             </div>
           </div>
@@ -124,13 +124,11 @@
                   </button>
                   <span
                     class="flex justify-center items-center text-3xl {{
-                      local.airLevel(local.getClima().data[0].aqi).cor
+                      local.getClima().nivelAr().cor
                     }} w-12 h-12 rounded-md"
-                    >{{ local.getClima().data[0].aqi }}</span
+                    >{{ local.getClima().getData().aqi }}</span
                   >
-                  <span class="text-2xl">{{
-                    local.airLevel(local.getClima().data[0].aqi).nivel
-                  }}</span>
+                  <span class="text-2xl">{{ local.getClima().nivelAr().nivel }}</span>
                 </div>
               </div>
             </div>
@@ -138,10 +136,10 @@
               <div class="flex flex-col items-center">
                 <h2 class="text-2xl lg:text-3xl">Precipitação</h2>
                 <i class="text-6xl bi bi-cloud-rain-fill"></i>
-                <span class="text-2xl lg:text-3xl">{{ local.getClima().data[0].precip }} mm/h</span>
-                <span class="text-center lg:text-3xl">{{
-                  local.chuvaLevel(local.getClima().data[0].precip)
-                }}</span>
+                <span class="text-2xl lg:text-3xl"
+                  >{{ local.getClima().getData().precip }} mm/h</span
+                >
+                <span class="text-center lg:text-3xl">{{ local.getClima().nivelChuva() }}</span>
               </div>
             </div>
           </div>
@@ -149,7 +147,11 @@
       </div>
       <div class="flex justify-center">
         <h1 class="font-semibold p-3 text-2xl text-center text-stone-800">
-          Data da observação: {{ local.getQueryDate().toLocaleDateString('pt-br', dateConfig) }} - {{local.getQueryDate().getHours()}}:{{local.getQueryDate().getMinutes()}}
+          Data da observação:
+          {{ local.getClima().getBuscaData().toLocaleDateString('pt-br', dateConfig) }} -
+          {{ local.getClima().getBuscaData().getHours() }}:{{
+            local.getClima().getBuscaData().getMinutes()
+          }}
         </h1>
       </div>
     </div>

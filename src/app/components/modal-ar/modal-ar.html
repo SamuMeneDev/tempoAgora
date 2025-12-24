@@ -1,11 +1,11 @@
 <div class="flex flex-col bg-white rounded-lg shadow-xl m-2">
   <div
     class="flex {{
-      data.airLevel(data.getClima().data[0].aqi).cor
+      data.getClima().nivelAr().cor
     }} p-2 rounded-t-lg justify-center"
   >
     <h1 class="text-4xl text-center font-semibold">
-      Qualidade do Ar: {{ data.airLevel(data.getClima().data[0].aqi).nivel }}
+      Qualidade do Ar: {{ data.getClima().nivelAr().nivel }}
     </h1>
   </div>
   <div class="flex flex-col p-3">
@@ -14,10 +14,10 @@
         <th>Qualidade do ar</th>
         <th>Situação</th>
       </tr>
-      @for (item of data.getAirDados(); track $index) {
+      @for (item of data.getClima().getArDados(); track $index) {
       <tr class="text-left odd:bg-cyan-100">
         <td class="flex items-center">
-          {{ item.indice }} @if(data.airLevel(data.getClima().data[0].aqi).indice == item.indice) {
+          {{ item.indice }} @if(data.getClima().nivelAr().indice == item.indice) {
           <i class="text-black text-2xl bi bi-caret-left-fill"></i>}
         </td>
         <td>{{ item.nivel }}</td>
@@ -35,7 +35,7 @@
       ></a>
     </div>
     <p class="sm:text-2xl text-center sm:w-2xl">
-      {{ data.airLevel(data.getClima().data[0].aqi).dica }}
+      {{ data.getClima().nivelAr().dica }}
     </p>
   </div>
   <button

@@ -3,6 +3,7 @@ import Local from '../models/Local';
 import { Dialog } from '@angular/cdk/dialog';
 import { ModalUv } from '../modal-uv/modal-uv';
 import { ModalAr } from '../modal-ar/modal-ar';
+import { Utils } from '../models/Utils';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +15,8 @@ export class Home {
   @Input() local!: Local;
   private dialogUV = inject(Dialog);
   private dialogAr = inject(Dialog);
+  util = new Utils();
+
 
   public dateConfig: {} = {
     weekday: 'long',

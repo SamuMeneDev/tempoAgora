@@ -4,10 +4,9 @@ import Estado from '../models/Estado';
 import Cidade from '../models/Cidade';
 import { Home } from '../home/home';
 import { Utils } from '../models/Utils';
-import { InputEstado } from '../input-estado/input-estado';
 @Component({
   selector: 'app-busca',
-  imports: [Home, InputEstado],
+  imports: [Home],
   templateUrl: './busca.html',
   styleUrl: './busca.css',
 })

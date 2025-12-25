@@ -1,0 +1,15 @@
+<div class="flex flex-col gap-2 bg-stone-200 p-2 rounded-md w-75">
+    <div class="flex">
+        <input placeholder="Nome do Estado" type="text" class="w-100 bg-white rounded-l-sm p-2 outline-none">
+        <button class="w-16 bg-sky-400 cursor-pointer rounded-r-sm">
+            <i class=" text-white bi bi-search"></i>
+        </button>
+    </div>
+    <div class="flex flex-col overflow-y-scroll h-30">
+        @for (cid of data; track cid.id) {
+            <button class="">
+                <p class="bg-white rounded-sm m-1 p-1.5">{{cid.nome}}</p>
+            </button>
+        }
+    </div>
+</div>

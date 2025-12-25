@@ -8,12 +8,13 @@
       <div class="flex gap-3 items-center flex-col">
         <fieldset>
           <legend>Estado</legend>
-          <select #es (change)="coletarEstado(es.value)" class="bg-gray-200 p-2 rounded-md w-75">
+          <app-input-bar [data]="this.estados" />
+          <!-- <select #es (change)="coletarEstado(es.value)" class="bg-gray-200 p-2 rounded-md w-75">
             <option value="-1">Selecione um estado</option>
             @for (uf of estados; track $index) {
             <option value="{{ uf.id }}">{{ uf.nome }}</option>
             }
-          </select>
+          </select> -->
         </fieldset>
         <fieldset>
           <legend>Cidade</legend>

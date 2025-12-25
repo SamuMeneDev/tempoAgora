@@ -4,9 +4,10 @@ import Estado from '../models/Estado';
 import Cidade from '../models/Cidade';
 import { Home } from '../home/home';
 import { Utils } from '../models/Utils';
+import { InputBar } from '../input-bar/input-bar';
 @Component({
   selector: 'app-busca',
-  imports: [Home],
+  imports: [Home, InputBar],
   templateUrl: './busca.html',
   styleUrl: './busca.css',
 })

@@ -4,10 +4,10 @@ import Estado from '../models/Estado';
 import Cidade from '../models/Cidade';
 import { Home } from '../home/home';
 import { Utils } from '../models/Utils';
-import { InputBar } from '../input-bar/input-bar';
+import { InputEstado } from '../input-estado/input-estado';
 @Component({
   selector: 'app-busca',
-  imports: [Home, InputBar],
+  imports: [Home, InputEstado],
   templateUrl: './busca.html',
   styleUrl: './busca.css',
 })
@@ -15,6 +15,9 @@ export class Busca {
   estados!: Array<Estado>;
   cidades!: Array<Cidade>;
   dataAtual = new Date();
+  public inputEstado!: string;
+  public inputCidade!: string;
+
   local = new Local(false); // true para testes
   noMatch: boolean = false;
 
@@ -25,7 +28,8 @@ export class Busca {
     this.estados = dados;
   }
 
-  public coletarEstado(id: number | string) { // Estado do Usuário
+  public coletarEstado(id: number | string) {
+    // Estado do Usuário
     let idParse!: number;
     if (typeof id === 'string') {
       idParse = Number(id);
@@ -45,7 +49,8 @@ export class Busca {
     this.local.setStatus(false);
   }
 
-  public coletarCidade(id: number | string) { // Cidade do usuário
+  public coletarCidade(id: number | string) {
+    // Cidade do usuário
     let idParse!: number;
     if (typeof id === 'string') {
       idParse = Number(id);

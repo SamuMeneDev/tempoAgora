@@ -11,12 +11,12 @@ export default class Local {
     if (teste) {
       // Template para não consumir a API
       this.estado = {
-        id: 0,
+        id: -1,
         nome: 'São Paulo',
         sigla: 'SP',
       };
       this.cidade = {
-        id: 100,
+        id: -1,
         nome: 'São Paulo',
       };
       const data = [

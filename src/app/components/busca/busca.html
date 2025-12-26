@@ -8,21 +8,23 @@
       <div class="flex gap-3 items-center flex-col">
         <fieldset>
           <legend>Estado</legend>
-          <select #es (change)="coletarEstado(es.value)" class="bg-gray-200 p-2 rounded-md w-75">
+          <app-busca-lista (outSelected)="coletarEstado($event)" [data]="this.estados" [placeholder]="'Nome do estado'" />
+          <!--<select #es (change)="coletarEstado(es.value)" class="bg-gray-200 p-2 rounded-md w-75">
             <option value="-1">Selecione um estado</option>
             @for (uf of estados; track $index) {
             <option value="{{ uf.id }}">{{ uf.nome }}</option>
             }
-          </select>
+          </select> -->
         </fieldset>
         <fieldset>
           <legend>Cidade</legend>
-          <select #cid class="bg-gray-200 p-2 rounded-md w-75" (change)="coletarCidade(cid.value)">
+          <app-busca-cidade (outSelected)="coletarCidade($event)" [placeholder]="'Nome da cidade'" [data]="this.cidades" />
+          <!--<select #cid class="bg-gray-200 p-2 rounded-md w-75" (change)="coletarCidade(cid.value)">
             <option value="-1">Selecione uma cidade</option>
             @for (cd of cidades; track $index) {
             <option value="{{ cd.id }}">{{ cd.nome }}</option>
             }
-          </select>
+          </select> -->
         </fieldset>
       </div>
       <button

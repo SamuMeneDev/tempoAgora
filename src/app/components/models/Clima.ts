@@ -107,7 +107,7 @@ export class Clima {
   // METODOS
   public nivelChuva(): string {
     if (this.data.precip <= 0) {
-      return 'Sem chuva prevista';
+      return 'Sem chuva';
     } else if (this.data.precip <= 2.5) {
       return 'Chuva Fraca';
     } else if (this.data.precip <= 10) {

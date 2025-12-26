@@ -4,9 +4,11 @@ import Estado from '../models/Estado';
 import Cidade from '../models/Cidade';
 import { Home } from '../home/home';
 import { Utils } from '../models/Utils';
+import { BuscaLista } from "../busca-lista/busca-lista";
+import { BuscaCidade } from "../busca-cidade/busca-cidade";
 @Component({
   selector: 'app-busca',
-  imports: [Home],
+  imports: [Home, BuscaLista, BuscaCidade],
   templateUrl: './busca.html',
   styleUrl: './busca.css',
 })
@@ -21,14 +23,12 @@ export class Busca {
   noMatch: boolean = false;
 
   constructor() {
-    const dados = JSON.parse(
-      Utils.requisicao('https://servicodados.ibge.gov.br/api/v1/localidades/estados') // Carrega a lista de Estados
-    );
-    this.estados = dados;
+    this.carregarEstados();
   }
 
   public coletarEstado(id: number | string) {
     // Estado do Usuário
+   
     let idParse!: number;
     if (typeof id === 'string') {
       idParse = Number(id);
@@ -43,6 +43,7 @@ export class Busca {
       );
       this.carregarCidades(idParse);
     } else {
+      this.cidades = [];
       this.local.resetAll();
     }
     this.local.setStatus(false);
@@ -75,7 +76,11 @@ export class Busca {
       )
     );
   }
-
+  public carregarEstados() {
+    this.estados = JSON.parse(
+      Utils.requisicao('https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome')
+    ); // Carrega a lista de Estados)
+  }
   public buscarTempo() {
     if (this.local.getCidade().id !== -1 && this.local.getEstado().id !== -1) {
       this.local.setStatus(true);

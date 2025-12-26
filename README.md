@@ -16,6 +16,7 @@ Site que mostra informações do clima das cidades do Brasil. Esse é o meu prim
 - Modal de qualidade do ar com dados corretos
 - Mensagem de instrução ao não selecionar localidade
 - Reestruturação das classes e Models da aplicação
+- Criação do componente de busca com opções para as localidades
 
 Em breve mais atualizações!
 

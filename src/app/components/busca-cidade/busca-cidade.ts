@@ -14,7 +14,7 @@ export class BuscaCidade implements OnChanges{
     this.inputValue = "";
   }
   @Input() data!: Estado[] | Cidade[];
-  inputValue = '';
+  @Input() inputValue = "";
   @Input() placeholder!: string;
   selected = -1;
   @Output() outSelected = new EventEmitter<number>();

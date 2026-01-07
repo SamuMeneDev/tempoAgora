@@ -50,5 +50,8 @@ export class Utils {
     const formatDate = new Date(dateTime[0] + 'T' + Utils.parseTime(dateTime[1]) + ':00');
     return formatDate;
   }
+  public static formatDateString(hora: number, minutos:number) {
+    return `${hora>9?hora:"0"+hora}:${minutos>9?minutos:"0"+minutos}`
+  }
   
 }

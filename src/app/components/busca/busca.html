@@ -1,30 +1,25 @@
 <div class="grid sm:grid-cols-2 lg:grid-cols-3 h-screen">
   <div class="grid lg:col-span-1">
-    <div class="flex self-center flex-col gap-3 flex-9/12">
+    <app-historico (busca)="queryHistory($event)" [historico]="historico" (openEvent)="reOpenHome($event)" [class.hidden]="!toogleHistorico" />
+    <button [class.hidden]="toogleHistorico" (click)="handleToogleHistorico()" class="fixed cursor-pointer rounded-sm w-10 h-10 hover:bg-green-400 bg-green-500">
+      <i class="text-2xl text-white bi bi-clock-history"></i>
+    </button>
+    <div [class.hidden]="toogleHistorico" class="flex pt-5 flex-col gap-3 flex-9/12">
+      
       <div class="flex flex-col items-center">
-        <h1 class="text-4xl font-semibold">Tempo Agora</h1>
-        <h2 class="text-2xl text-center">Selecione uma cidade para realizar a busca</h2>
+        
+        <h1 class="flex text-4xl font-semibold">Tempo Agora</h1>
+        <h2 class="text-center">Selecione uma cidade para realizar a busca</h2>
       </div>
-      <div class="flex gap-3 items-center flex-col">
+      
+        <div class="flex gap-3 items-center flex-col">
         <fieldset>
           <legend>Estado</legend>
-          <app-busca-lista (outSelected)="coletarEstado($event)" [data]="this.estados" [placeholder]="'Nome do estado'" />
-          <!--<select #es (change)="coletarEstado(es.value)" class="bg-gray-200 p-2 rounded-md w-75">
-            <option value="-1">Selecione um estado</option>
-            @for (uf of estados; track $index) {
-            <option value="{{ uf.id }}">{{ uf.nome }}</option>
-            }
-          </select> -->
+          <app-busca-lista [inputValue]="inputEstado" (outSelected)="coletarEstado($event)" [data]="this.estados" [placeholder]="'Nome do estado'" />
         </fieldset>
         <fieldset>
           <legend>Cidade</legend>
-          <app-busca-cidade (outSelected)="coletarCidade($event)" [placeholder]="'Nome da cidade'" [data]="this.cidades" />
-          <!--<select #cid class="bg-gray-200 p-2 rounded-md w-75" (change)="coletarCidade(cid.value)">
-            <option value="-1">Selecione uma cidade</option>
-            @for (cd of cidades; track $index) {
-            <option value="{{ cd.id }}">{{ cd.nome }}</option>
-            }
-          </select> -->
+          <app-busca-cidade [inputValue]="inputCidade" (outSelected)="coletarCidade($event)" [placeholder]="'Nome da cidade'" [data]="this.cidades" />
         </fieldset>
       </div>
       <button

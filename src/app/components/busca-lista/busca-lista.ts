@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class BuscaLista {
   @Input() data!: Estado[] | Cidade[];
-  inputValue = "";
+  @Input() inputValue = "";
   @Input() placeholder!: string;
   selected = -1;
   @Output() outSelected = new EventEmitter<number>;
